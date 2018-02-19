@@ -1,7 +1,7 @@
 import math
 import numpy as np
 
-import gym
+from gym import Env, spaces
 from gym.utils import seeding
 
 LEFT_NOPUSH = 0
@@ -20,7 +20,7 @@ def categorical_sample(prob_n, np_random):
     csprob_n = np.cumsum(prob_n)
     return (csprob_n > np_random.rand()).argmax()
 
-class JetsonEnv(gym.Env):
+class JetsonEnv(Env):
 
     def __init__(self, nLED=4):
     # board (nLED + 1) and arm position (nLED)
@@ -31,8 +31,11 @@ class JetsonEnv(gym.Env):
         [board = 3] 0001 (0, 1, 2, 3)
         [board = 4] 0000 (0, 1, 2, 3)
         '''
+        self.nLED = nLED
         self.nS = nLED * (nLED + 1)
+        self.observation_space = spaces.Discrete(self.nS)
         self.nA = 6
+        self.action_space = spaces.Discrete(self.nA)
 
         self.isd = (np.arange(self.nS) < math.pow(nLED, 2)).astype('float64')
         self.isd /= self.isd.sum()
@@ -46,7 +49,7 @@ class JetsonEnv(gym.Env):
             if a==2 or a==5: # right
                 arm_pos = min(arm_pos+1, nLED-1)
             if a>=3 and board==arm_pos: # push
-                board = 4
+                board = nLED
             return board, arm_pos
 
         def get_rew(board, arm_pos, a, new_board, new_arm_pos, done):
@@ -73,31 +76,35 @@ class JetsonEnv(gym.Env):
                         li.append((1.0, s, 0, True))
                     else:
                         new_board, new_arm_pos = inc(board, arm_pos, a)
-                        new_state = to_s(board, arm_pos)
+                        new_state = to_s(new_board, new_arm_pos)
                         done = (new_board == nLED)
                         rew = get_rew(board, arm_pos, a, new_board, new_arm_pos, done)
                         li.append((1.0, new_state, rew, done))
         self.P = P
+        self.seed()
 
-        self._seed()
-        self._reset()
-
-    def _seed(self, seed=None):
-        self.np_random, seed = seeding.np_random(seed)
-        return [seed]
-
-    def _reset(self):
-        self.s = categorical_sample(self.isd, self.np_random)
-        self.lastaction=None
-        return self.s
-
-    def _step(self, action):
+    def step(self, action):
         transitions = self.P[self.s][action]
         i = categorical_sample([t[0] for t in transitions], self.np_random)
         p, s, r, d = transitions[i]
         self.s = s
-        self.lastaction = action
+        if d == True:
+            self.reset()
         return (s, r, d, {"prob" : p})
 
-    def _render(self, mode='human', close=False):
+    def reset(self):
+        self.s = categorical_sample(self.isd, self.np_random)
+        return self.s
+
+    def render(self, mode='human'):
         pass
+
+    def seed(self, seed=None):
+        self.np_random, seed = seeding.np_random(seed)
+        return [seed]
+
+
+
+
+
+    
