@@ -24,7 +24,7 @@ class JetsonEnv():
             self.pos = min(self.old_pos+1, self.nLED-1)
             
     def get_reward(self, a):
-        rew = -1.0
+        rew = -1
         return rew
 
     def step(self, a):
