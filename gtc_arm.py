@@ -60,9 +60,9 @@ bus.write_word_data(addr, 0x08, 1594)
 
 
 def led_status():
-	"""checks each led status, returns array corresponding to which LED currently high"""
+    """checks each led status, returns array corresponding to which LED currently high"""
     if gpio.read(out_one) == 1:
-        return 0	
+        return 0    
     elif gpio.read(out_two) == 1:
         return 1
     elif gpio.read(out_three) == 1:
@@ -183,31 +183,31 @@ def reset():
 
 
 def play_round(env, Q):
-	# reset the game
-	reset()
-	arm = np.random.choice(env.nLED)
-	led = np.random.choice(env.nLED)
-	light_led(led)
-	move_to_position(arm)
+    # reset the game
+    reset()
+    arm = np.random.choice(env.nLED)
+    led = np.random.choice(env.nLED)
+    light_led(led)
+    move_to_position(arm)
 
-	game_round = []
-	state = get_state(led, arm)
-	action = np.random.choice(env.nA)
-	game_round.append((state, action))
+    game_round = []
+    state = get_state(led, arm)
+    action = np.random.choice(env.nA)
+    game_round.append((state, action))
 
-	led, arm = set_arm_position(action)
-	
-	for i in range(14):
-		if not led==4:
-			state = get_state(led, arm)
-			best_actions = np.argwhere(Q[state] == np.amax(Q[state])).flatten() 
-	        action = random.choice(best_actions)    
-	        led, arm = set_arm_position(action)        
-	        game_round.append((state, action))    
-	    else:
-	    	break
+    led, arm = set_arm_position(action)
+    
+    for i in range(14):
+        if not led==4:
+            state = get_state(led, arm)
+            best_actions = np.argwhere(Q[state] == np.amax(Q[state])).flatten() 
+            action = random.choice(best_actions)    
+            led, arm = set_arm_position(action)        
+            game_round.append((state, action))    
+        else:
+            break
 
-	return game_round  
+    return game_round  
 
 
 def get_state(led, arm, nLED=4):
@@ -217,7 +217,7 @@ def get_state(led, arm, nLED=4):
 
 def monte_carlo(env, num_rounds=100):    
     Q = -5*np.ones((env.nS, env.nA), dtype=float)   # initialize empty array
-    scores = defaultdict(lambda: [])        		# initialize dictionary of empty lists
+    scores = defaultdict(lambda: [])                # initialize dictionary of empty lists
     
     # loop over game rounds
     for i_round in range(1, num_rounds+1):
