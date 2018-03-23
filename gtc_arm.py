@@ -177,7 +177,7 @@ def play_round(env, Q):
     #  YOUR CODE HERE ! #
     #####################
             
-    return game_round  
+    pass  
 
 
 def monte_carlo(env, num_rounds=100):    
@@ -186,9 +186,31 @@ def monte_carlo(env, num_rounds=100):
     #  YOUR CODE HERE ! #
     #####################
 
-    return Q
+    pass
 
+def test_setup():
+    led = 0
+    light_led(led)
+    move_to_position(0)
+    push_button(led)
 
-env = JetsonEnv()
-Q = monte_carlo(env)
+    led = 1
+    light_led(led)
+    move_to_position(1)
+    push_button(led)
+
+    led = 2
+    light_led(led)
+    move_to_position(2)
+    push_button(led)
+
+    led=3
+    light_led(led)
+    move_to_position(3)
+    push_button(led)
+    
+test_setup()
+#env = JetsonEnv()
+#Q = monte_carlo(env)
+
 bus.close()
