@@ -172,12 +172,31 @@ def get_state(led, arm, nLED=4):
 
 
 def play_round(env, Q):
+    # reset the game
+    reset()
+    arm = np.random.choice(env.nLED)
+    led = np.random.choice(env.nLED)
+    light_led(led)
+    move_to_position(arm)
 
-    #####################
-    #  YOUR CODE HERE ! #
-    #####################
+    game_round = []
+    state = get_state(led, arm)
+    action = np.random.choice(env.nA)
+    game_round.append((state, action))
+
+    led, arm = set_arm_position(action, led, arm)
+    
+    for i in range(14):
+        if not led==4:
+            state = get_state(led, arm)
+            best_actions = np.argwhere(Q[state] == np.amax(Q[state])).flatten() 
+            action = random.choice(best_actions)    
+            led, arm = set_arm_position(action, led, arm)        
+            game_round.append((state, action))    
+        else:
+            break
             
-    pass  
+    return game_round   
 
 
 def monte_carlo(env, num_rounds=100):    
