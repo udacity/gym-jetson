@@ -60,7 +60,7 @@ def led_status():
     elif gpio.read(out_three) == 1:
         return 3
     else:
-    return 4 # all LEDs are low
+        return 4 # all LEDs are low
 
 def move_to_position(m):
     """change the position of the arm"""
@@ -116,7 +116,7 @@ def dance():
 
 def set_arm_position(command, led, arm):
     if command == 0 and arm > 0: # move left
-    new_arm = arm-1
+        new_arm = arm-1
         move_to_position(new_arm)
         return (led_status(), new_arm)
     elif command == 1: # stay in current position and push
