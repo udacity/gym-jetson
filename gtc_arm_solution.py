@@ -8,8 +8,7 @@ import math
 from collections import defaultdict
 from jetson_env import JetsonEnv
 
-bus = smbus.SMBus(1)
-
+#assign Jetson sysfs GPIO pins 
 in_zero = 300
 out_zero = 388
 
@@ -22,31 +21,48 @@ out_two = 299
 in_three = 481
 out_three = 488
 
+#TODO: change the PWM endtime values below to change the positions the servos move to
+#increase the position values to move the arm to the left, and decrease to move to the right. 1 degree = 4.6
+position_zero = 1594
+position_one = 1457
+position_two = 1275
+position_three = 1091
+
+arm_neutral = 1250 
+#TODO: decrease arm_pressed to move the arm closer to the buttons/ press harder
+arm_pressed = 900
+
+#set up the GPIO pins as inputs or outputs, and set outputs to 0
 gpio.setup(in_zero, gpio.IN)     # button 0
 gpio.setup(out_zero, gpio.OUT)   # led 0
-gpio.output(out_zero, 0)
+gpio.output(out_zero, 0) #set led 0 to low/off
 
 gpio.setup(in_one, gpio.IN)     # button 1
 gpio.setup(out_one, gpio.OUT)   # led 1
-gpio.output(out_one, 0)
+gpio.output(out_one, 0) #set led 1 to low/off
 
 gpio.setup(in_two, gpio.IN)    # button 2
 gpio.setup(out_two, gpio.OUT)  # led 2
-gpio.output(out_two, 0)
+gpio.output(out_two, 0) #set led 2 to low/off
 
 gpio.setup(in_three, gpio.IN)    # button 3
 gpio.setup(out_three, gpio.OUT)  # led 3
-gpio.output(out_three, 0)
+gpio.output(out_three, 0) #set led 3 to low/off
 
+#create object of type SMBus, attach it to bus "1"of the Jetson
+bus = smbus.SMBus(1)
+
+#the default address of the PWM servo hat is 0x40
 addr = 0x40
+#enable the PWM chip and tell it to automatically increment addresses after a write to allow for single operation multi-byte writes
 bus.write_byte_data(addr, 0, 0x20)
 bus.write_byte_data(addr, 0xfe, 0x1e)
-
+#write a start time 0 to the PWM chip for channel 0 and channel 1
 bus.write_word_data(addr, 0x06, 0)
 bus.write_word_data(addr, 0x0A, 0)
-
-bus.write_word_data(addr, 0x0C, 1250)
-bus.write_word_data(addr, 0x08, 1594)
+#write an end time to channel 0 and channel 1, which will set the servo motors to their starting position
+bus.write_word_data(addr, 0x0C, arm_neutral)
+bus.write_word_data(addr, 0x08, position_zero)
 
 
 def led_status():
@@ -63,26 +79,27 @@ def led_status():
         return 4 # all LEDs are low
 
 def move_to_position(m):
-    """change the position of the arm"""
+    """change the position of the arm base by writing new end time to PWM chip for channel 0 of servo hat"""
     if m == 0:
         time.sleep(.5)
-        bus.write_word_data(addr, 0x08, 1594)
+        bus.write_word_data(addr, 0x08, position_zero)
     elif m == 1:
         time.sleep(.5)
-        bus.write_word_data(addr, 0x08, 1457)
+        bus.write_word_data(addr, 0x08, position_one)
     elif m == 2:
         time.sleep(.5)
-        bus.write_word_data(addr, 0x08, 1275)
+        bus.write_word_data(addr, 0x08, position_two)
     elif m == 3:
         time.sleep(.5)
-        bus.write_word_data(addr, 0x08, 1091)
+        bus.write_word_data(addr, 0x08, position_three)
 
 
 def push_button(led):
+    """change the angle of the arm by writing new end time to PWM chip for channel 1 of servo hat"""
     time.sleep(.5)
-    bus.write_word_data(addr, 0x0C, 900)
+    bus.write_word_data(addr, 0x0C, arm_pressed)
     time.sleep(.5)
-    bus.write_word_data(addr, 0x0C,1250)
+    bus.write_word_data(addr, 0x0C, arm_neutral)
     button_led_check(led)
 
 
@@ -131,6 +148,7 @@ def set_arm_position(command, led, arm):
 
 
 def light_led(led):
+    """led on by setting corresponding gpio pin to 1/ high/ on"""
     if led == 0:
         gpio.output(out_zero, 1)
     elif led == 1:
@@ -144,6 +162,8 @@ def light_led(led):
 
 
 def reset():
+        """Physical switch is momentary, but the sysfs gpio 
+        maintains an on state in the software until you toggle it off by resetting the gpio pin"""
         gpio.setup(in_zero,gpio.OUT)
         gpio.setup(in_one, gpio.OUT)
         gpio.setup(in_two, gpio.OUT)
@@ -203,7 +223,7 @@ def monte_carlo(env, num_rounds=100):
     nS = env.nS        # number of states
     nA = env.nA        # number of actions
     
-    Q = -5*np.ones((nS, nA), dtype=float)   # initialize empty array
+    Q = -1*np.ones((nS, nA), dtype=float)   # initialize empty array
     scores = defaultdict(lambda: [])        # initialize dictionary of empty lists
     
     # loop over game rounds
@@ -218,7 +238,7 @@ def monte_carlo(env, num_rounds=100):
         # use game round to update Q
         for s, a in set(game_round):                                    # loop over state-action pairs
             idx = min([i for i,x in enumerate(game_round) if x==(s,a)]) # obtain first index where pair appears
-            scores[s,a].append(-len(game_round[idx:]))                  # append effective final score to scores[s,a]
+            scores[s,a].append(-len(game_round[idx:]))                  # append return to scores[s,a]
             Q[s,a] = np.mean(scores[s,a])                               # set Q[s,a] to the mean of scores[s,a]
     return Q
 
@@ -243,8 +263,8 @@ def test_setup():
     move_to_position(3)
     push_button(led)
     
-test_setup()
-#env = JetsonEnv()
-#Q = monte_carlo(env)
+#test_setup()
+env = JetsonEnv()
+Q = monte_carlo(env)
 
 bus.close()
