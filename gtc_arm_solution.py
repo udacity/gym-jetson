@@ -229,10 +229,6 @@ def monte_carlo(env, num_rounds=100):
     # loop over game rounds
     for i_round in range(1, num_rounds+1):
         
-        # monitor progress
-        print("\rGame Round {}/{}.".format(i_round, num_rounds), end="")
-        sys.stdout.flush()
-        
         game_round = play_round(env, Q)     # play game round
         
         # use game round to update Q
