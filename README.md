@@ -14,7 +14,7 @@ To launch the [notebook](https://github.com/udacity/gym-jetson/blob/master/Intro
 ``` bash
 $ git clone https://github.com/udacity/gym-jetson.git
 $ cd gym-jetson
-$ jupyter notebook 
+$ jupyter notebook Introduction.ipynb
 ```
 
 TODO: CAD files + assembly photos and instructions, troubleshooting,
