@@ -9,7 +9,7 @@ Are you ready to learn how to use your Jetson TX2 for robotics applications? Joi
 
 ## Getting Started
 
-To launch the [notebook](gym-jetson/Introduction to Reinforcement Learning with NVIDIA Jetson TX2.ipynb) locally from your machine, run the following commands:
+To launch the [notebook](https://github.com/udacity/gym-jetson/blob/master/Introduction%20to%20Reinforcement%20Learning%20with%20NVIDIA%20Jetson%20TX2.ipynb) locally from your machine, run the following commands:
 
 ``` bash
 $ git clone https://github.com/udacity/gym-jetson.git
