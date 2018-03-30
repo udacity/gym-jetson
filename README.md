@@ -5,9 +5,12 @@ Are you ready to learn how to use your Jetson TX2 for robotics applications? Joi
 
 <img src="https://github.com/udacity/gym-jetson/blob/master/images/robot-working.gif" width="300">
 
-[Bill of Materials](http://sfe.io/w145090) TODO: format, add screws and headers
-
 ## Getting Started
+
+[Bill of Materials](gym-jetson/BOM.md) TODO: add CAD files and info
+[Assembling the Robot](gym-jetson/Assembly.md) TODO: add photos and instructions
+
+Jupyter notebooks have been created for this project. The first notebook covers taking control of the robot, including assembly and wiring of the electronic components, testing and troubleshooting getting the arm to hit the buttons and have the lights turn on and off. A second notebook discusses the reinforcement learning component, where we program the robot to play a game.
 
 To launch the [notebook](https://github.com/udacity/gym-jetson/blob/master/Introduction%20to%20Reinforcement%20Learning%20with%20NVIDIA%20Jetson%20TX2.ipynb) locally from your machine, run the following commands:
 
@@ -16,5 +19,3 @@ $ git clone https://github.com/udacity/gym-jetson.git
 $ cd gym-jetson
 $ jupyter notebook Introduction.ipynb
 ```
-
-TODO: CAD files + assembly photos and instructions, troubleshooting,
