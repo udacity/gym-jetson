@@ -7,7 +7,7 @@ Are you ready to learn how to use your Jetson TX2 for robotics applications? In 
 
 ## Getting Started
 
-[Bill of Materials](https://github.com/udacity/gym-jetson/blob/master/BOM.md) TODO: add CAD files and info
+[Bill of Materials](https://github.com/udacity/gym-jetson/blob/master/BOM.md) 
 
 [Assembling the Robot](https://github.com/udacity/gym-jetson/blob/master/Assembly.md) TODO: add photos and instructions
 
