@@ -9,7 +9,7 @@ Are you ready to learn how to use your Jetson TX2 for robotics applications? In 
 
 [Bill of Materials](https://github.com/udacity/gym-jetson/blob/master/BOM.md) 
 
-[Assembling the Robot](https://github.com/udacity/gym-jetson/blob/master/Assembly.md) TODO: add photos and instructions
+[Assembling the Robot](https://github.com/udacity/gym-jetson/blob/master/Assembly.md) 
 
 Jupyter notebooks have been created for this project. The first notebook covers taking control of the robot, including assembly and wiring of the electronic components, testing and troubleshooting getting the arm to hit the buttons and have the lights turn on and off. A second notebook discusses the reinforcement learning component, where we program the robot to play a game.
 
