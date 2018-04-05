@@ -7,7 +7,7 @@ Are you ready to learn how to use your Jetson TX2 for robotics applications? In 
 
 ## Getting Started
 
-1. Start by ordering the parts and tools listed in the [Bill of Materials](https://github.com/udacity/gym-jetson/blob/master/robot_construction/BOM.md)
+1. Start by ordering the parts and gathering the tools listed in the [Bill of Materials](https://github.com/udacity/gym-jetson/blob/master/robot_construction/BOM.md) You will also find the .dxf file used to laser cut this robot. If you don't have access to a laser cuter, use the design to inspire your own version using other materials.
 
 2. Follow the steps for [Assembling the Robot](https://github.com/udacity/gym-jetson/blob/master/robot_construction/assembly.md) 
 
