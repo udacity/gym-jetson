@@ -39,6 +39,24 @@ Attach the other servo to the vertical servo plate as shown below using 4 screws
 
 BEFORE the next step, use the Jetson and the servo HAT to "zero" the pan servo to a PWM start time of 0 and an end time of 1250.
 
+```
+import smbus
+
+bus = smbus.SMBus(1)
+
+addr = 0x40
+bus.write_byte_data(addr, 0, 0x20)
+bus.write_byte_data(addr, 0xfe, 0x1e)
+
+bus.write_word_data(addr, 0x06, 0)
+bus.write_word_data(addr, 0x0A, 0)
+
+bus.write_word_data(addr, 0x0C, 1250)
+bus.write_word_data(addr, 0x08, 1250)
+
+bus.close()
+```
+
 Using the small screw from the servo kit, screw the servo horn/ tilt sevo base to the pan servo as shown below. The orientation of this piece is very important!
 
 <img src="https://github.com/udacity/gym-jetson/blob/master/images/assembly10.jpg" width="300">
@@ -48,6 +66,24 @@ Affix the vertical servo plate and the two triangular support pieces to the tilt
 <img src="https://github.com/udacity/gym-jetson/blob/master/images/assembly11.jpg" width="300">
 
 BEFORE the next step, use the Jetson and the servo HAT to "zero" the tilt servo to a PWM start time of 0 and an end time of 1250.
+
+```
+import smbus
+
+bus = smbus.SMBus(1)
+
+addr = 0x40
+bus.write_byte_data(addr, 0, 0x20)
+bus.write_byte_data(addr, 0xfe, 0x1e)
+
+bus.write_word_data(addr, 0x06, 0)
+bus.write_word_data(addr, 0x0A, 0)
+
+bus.write_word_data(addr, 0x0C, 1250)
+bus.write_word_data(addr, 0x08, 1250)
+
+bus.close()
+```
 
 Attach the 4-prong servo horn to the robot arm using 2 small gold screws. Using the small screw from the servo kit, screw the servo horn/ robot arm to the tilt servo as shown below. The angle and orientation of this piece is very important.
 
