@@ -2,6 +2,8 @@
 
 ### Lights Out Robot
 
+Laser cut [base and arm](https://github.com/udacity/gym-jetson/blob/master/robot_construction/gtc_base_arm.dxf) on 3mm acrylic or wood
+
 | Vendor       | Part          | Qty.  |
 | ------------ | ------------- | ----- |
 | Sparkfun | [Servo - Hitec HS-422 (Standard Size)](https://www.sparkfun.com/products/11884) | 2 |
@@ -25,8 +27,6 @@
 | Sparkfun | [Silicone Bumpers - Large (10x16.5mm, 4 pack)](https://www.sparkfun.com/products/10594) | 1 |
 | Fastenal | [Screws for servo horns](https://www.fastenal.com/products/details/75403) | 4 |
 | Amazon | [HELLOYEE 2x20 Pins Extra Tall Female 0.1" Pitch Stacking Header for Raspberry Pi A+ Pi Model B+ Pi 2 Pi 3 (Pack of 5)](https://www.amazon.ca/HELLOYEE-Female-Stacking-Header-Raspberry/dp/B071VFG82G/ref=sr_1_fkmr2_1?ie=UTF8&qid=1520001725&sr=8-1-fkmr2&keywords=40+pin++female+stacking+header) | 1 |
-
-Laser cut [base and arm](https://github.com/udacity/gym-jetson/blob/master/robot_construction/gtc_base_arm.dxf) on 3mm acrylic or wood
 
 ### Tools Required
 | Tool      | Notes |
