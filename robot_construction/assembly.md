@@ -1,25 +1,35 @@
 ## Assembly Steps
 
-Let's begin by using the Jetson and the servo HAT to "zero" both servos to a PWM start time of 0 and an end time of 1250. This will put the servos into a neutral position before we attach the base and arm. This will enure that the arm is in a starting position from which the positions of the buttons have been calculated to correspond to in later steps.
+Before we can use the servo HAT, we need to solder the extra tall 40 pin stacking header onto the servo HAT. Look at the image below to understand how to do this so that it can be plugged into the Jetson and still allow us to plug wires into the exposed pins later on.
+
+<img src="https://github.com/udacity/gym-jetson/blob/master/images/jetson7.jpg" width="300">
+
+Next,lets use the Jetson and the servo HAT to "zero" both servos to a PWM start time of 0 and an end time of 1250. This will put the servos into a neutral position before we attach the base and arm. This will ensure that the arm is in a starting position from which the positions of the buttons have been calculated to correspond to in later steps.
 
 To do this, plug the servo HAT into the Jetson J21 header as shown below, and plug the pan servo into channel 0 and the tilt servo into channel 1.
 
-<img src="https://github.com/udacity/gym-jetson/blob/master/images/jetson3.jpg" width="300">
+<img src="https://github.com/udacity/gym-jetson/blob/master/images/jetson6.jpg" width="300">
 
 Put the code below into a .py file on the Jetson, and run to initialise the i2c device and write 0 and 1250 as start and stop times to both channel 0 and channel 1 of the HAT. You can find more information about i2c, smbus, and the specific channels that we are writing data to in later steps in the Jupyter notebook.
 
 ```
 import smbus
 
+#create object of type SMBus, attach it to bus "1"of the Jetson
 bus = smbus.SMBus(1)
 
+#the default address of the PWM servo hat is 0x40
 addr = 0x40
+
+#enable the PWM chip and tell it to automatically increment addresses after a write to allow for single operation multi-byte writes
 bus.write_byte_data(addr, 0, 0x20)
 bus.write_byte_data(addr, 0xfe, 0x1e)
 
+#write a start time 0 to the PWM chip for channel 0 and channel 1
 bus.write_word_data(addr, 0x06, 0)
 bus.write_word_data(addr, 0x0A, 0)
 
+#write an end time to channel 0 and channel 1, which will set the servo motors to their starting position
 bus.write_word_data(addr, 0x0C, 1250)
 bus.write_word_data(addr, 0x08, 1250)
 
