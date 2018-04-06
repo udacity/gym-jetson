@@ -9,9 +9,7 @@ Are you ready to learn how to use your Jetson TX2 for robotics applications? In 
 
 1. Start by ordering the parts and gathering the tools listed in the [Bill of Materials](https://github.com/udacity/gym-jetson/blob/master/robot_construction/BOM.md) You will also find the .dxf file used to laser cut this robot. If you don't have access to a laser cuter, use the design to inspire your own version using other materials.
 
-2. Follow the steps for [Assembling the Robot](https://github.com/udacity/gym-jetson/blob/master/robot_construction/assembly.md) 
-
-3. Set up your Jetson environment. This project was run on jetPack3.2, and was also tested on 3.1. Python libraries gpio, cffi, smbus, and numpy are required.
+2. Set up your Jetson environment. This project was run on jetPack3.2, and was also tested on 3.1. Python libraries gpio, cffi, smbus, and numpy are required.
 
 ```
 sudo apt-get install libffi-dev
@@ -19,7 +17,9 @@ sudo pip install cffi
 sudo pip install smbus-cffi numpy gpio
 ```
 
-4. Jupyter notebooks have been created for this project. The first notebook covers **taking control of the robot**, including assembly and wiring of the electronic components, testing and troubleshooting getting the arm to hit the buttons and have the lights turn on and off. A second notebook discusses **the reinforcement learning component, where we program the robot to play a game**.
+3. Follow the steps for [Assembling the Robot](https://github.com/udacity/gym-jetson/blob/master/robot_construction/assembly.md) 
+
+4. Jupyter notebooks have been created for this project to outline the next steps. The first notebook covers **taking control of the robot**, including assembly and wiring of the electronic components, testing and troubleshooting getting the arm to hit the buttons and have the lights turn on and off. A second notebook discusses **the reinforcement learning component, where we program the robot to play a game**.
 
 To launch the [notebook](https://github.com/udacity/gym-jetson/blob/master/0_Introduction.ipynb) locally from your machine, run the following commands:
 
