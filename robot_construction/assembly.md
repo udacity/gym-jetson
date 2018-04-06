@@ -1,12 +1,38 @@
 ## Assembly Steps
 
+Let's begin by using the Jetson and the servo HAT to "zero" both servos to a PWM start time of 0 and an end time of 1250. This will put the servos into a neutral position before we attach the base and arm. This will enure that the arm is in a starting position from which the positions of the buttons have been calculated to correspond to in later steps.
+
+To do this, plug the servo HAT into the Jetson J21 header as shown below, and plug the pan servo into channel 0 and the tilt servo into channel 1.
+
+<img src="https://github.com/udacity/gym-jetson/blob/master/images/jetson3.jpg" width="300">
+
+Put the code below into a .py file on the Jetson, and run to initialise the i2c device and write 0 and 1250 as start and stop times to both channel 0 and channel 1 of the HAT. You can find more information about i2c, smbus, and the specific channels that we are writing data to in later steps in the Jupyter notebook.
+
+```
+import smbus
+
+bus = smbus.SMBus(1)
+
+addr = 0x40
+bus.write_byte_data(addr, 0, 0x20)
+bus.write_byte_data(addr, 0xfe, 0x1e)
+
+bus.write_word_data(addr, 0x06, 0)
+bus.write_word_data(addr, 0x0A, 0)
+
+bus.write_word_data(addr, 0x0C, 1250)
+bus.write_word_data(addr, 0x08, 1250)
+
+bus.close()
+```
+
 <img src="https://github.com/udacity/gym-jetson/blob/master/images/assembly1.jpg" width="300">
 
-Begin with assembly of the base!
+Now we will move on to the assembly of the base!
 
 <img src="https://github.com/udacity/gym-jetson/blob/master/images/assembly2.jpg" width="300">
 
-Push an LED into each holder, and attach one to each circular hole on acrylicLED panel assembly.
+Push an LED into each holder, and attach one to each circular hole on acrylic LED panel assembly.
 Set a button in each of the cutouts on the acrylic button panel. Two button leads will sit in each of the rectancular cutouts.
 The base of the button will sit flush with the surface of the acrylic button panel. Add a dab of hot glue under each button to attach it to the surface.
 
@@ -37,25 +63,7 @@ Attach the other servo to the vertical servo plate as shown below using 4 screws
 
 <img src="https://github.com/udacity/gym-jetson/blob/master/images/assembly9.jpg" width="300">
 
-BEFORE the next step, use the Jetson and the servo HAT to "zero" the pan servo to a PWM start time of 0 and an end time of 1250.
-
-```
-import smbus
-
-bus = smbus.SMBus(1)
-
-addr = 0x40
-bus.write_byte_data(addr, 0, 0x20)
-bus.write_byte_data(addr, 0xfe, 0x1e)
-
-bus.write_word_data(addr, 0x06, 0)
-bus.write_word_data(addr, 0x0A, 0)
-
-bus.write_word_data(addr, 0x0C, 1250)
-bus.write_word_data(addr, 0x08, 1250)
-
-bus.close()
-```
+BEFORE the next step, make sure you have used the Jetson and the servo HAT to "zero" the pan servo to a PWM start time of 0 and an end time of 1250 as shown in the first step of this assembly document.
 
 Using the small screw from the servo kit, screw the servo horn/ tilt sevo base to the pan servo as shown below. The orientation of this piece is very important!
 
@@ -65,25 +73,7 @@ Affix the vertical servo plate and the two triangular support pieces to the tilt
 
 <img src="https://github.com/udacity/gym-jetson/blob/master/images/assembly11.jpg" width="300">
 
-BEFORE the next step, use the Jetson and the servo HAT to "zero" the tilt servo to a PWM start time of 0 and an end time of 1250.
-
-```
-import smbus
-
-bus = smbus.SMBus(1)
-
-addr = 0x40
-bus.write_byte_data(addr, 0, 0x20)
-bus.write_byte_data(addr, 0xfe, 0x1e)
-
-bus.write_word_data(addr, 0x06, 0)
-bus.write_word_data(addr, 0x0A, 0)
-
-bus.write_word_data(addr, 0x0C, 1250)
-bus.write_word_data(addr, 0x08, 1250)
-
-bus.close()
-```
+BEFORE the next step, make sure you have used the Jetson and the servo HAT to "zero" the tilt servo to a PWM start time of 0 and an end time of 1250.
 
 Attach the 4-prong servo horn to the robot arm using 2 small gold screws. Using the small screw from the servo kit, screw the servo horn/ robot arm to the tilt servo as shown below. The angle and orientation of this piece is very important.
 
