@@ -2,7 +2,9 @@
 
 ### Lights Out Robot
 
-Laser cut [base and arm](https://github.com/udacity/gym-jetson/blob/master/robot_construction/gtc_base_arm.dxf) on 3mm acrylic or wood
+Laser cut [base and arm](https://github.com/udacity/gym-jetson/blob/master/robot_construction/gtc_base_arm.dxf) on 3mm acrylic or wood. This design is just under 1 square foot of material (approimately 30.5 cm squared). 
+
+If you do not have access to a laser cutter, you can use a service such as [Ponoko](https://www.ponoko.com/) to have the file cut and sent to you! 
 
 | Vendor       | Part          | Qty.  |
 | ------------ | ------------- | ----- |
