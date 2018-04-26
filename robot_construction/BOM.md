@@ -2,13 +2,15 @@
 
 ### Lights Out Robot
 
-Laser cut [base and arm](https://github.com/udacity/gym-jetson/blob/master/robot_construction/gtc_base_arm.dxf) on 3mm acrylic or wood. This design is just under 1 square foot of material (approimately 30.5 cm squared). 
+Laser cut [base and arm dxf](https://github.com/udacity/gym-jetson/blob/master/robot_construction/gtc_base_arm.dxf) or [base and arm eps](https://github.com/udacity/gym-jetson/blob/master/robot_construction/gtc_base_arm.eps)on 3mm acrylic. This design is just under 1 square foot of material (approimately 30.5 cm squared). 
 
-If you do not have access to a laser cutter, you can use a service such as [Ponoko](https://www.ponoko.com/) to have the file cut and sent to you! 
+If you do not have access to a laser cutter, you can use a service such as [Ponoko](https://www.ponoko.com/) to have the file cut and sent to you! To do this, you can add a new design > upload your design > navigate to gtc_base_arm.dxf or gtc_base_arm.eps > add material (select plastic) > choose a material (select acrylic, your choice of colour) > choose a thickness (3.0mm) > choose a size (P2 - 384mm). Select "add this material" and "Make it"! 
+
+
 
 | Vendor       | Part          | Qty.  |
 | ------------ | ------------- | ----- |
-| Sparkfun | [Servo - Hitec HS-422 (Standard Size)](https://www.sparkfun.com/products/11884) | 2 |
+| Adafruit | [Standard servo - TowerPro SG-5010 - 5010](https://www.adafruit.com/product/155) | 2 |
 | Sparkfun | [Tactile Button Assortment](https://www.sparkfun.com/products/10302) | 1 |
 | Sparkfun | [Diffused LED - Blue 10mm](https://www.sparkfun.com/products/10635) | 1 |
 | Sparkfun | [Diffused LED - Green 10mm](https://www.sparkfun.com/products/10633) | 1 |
