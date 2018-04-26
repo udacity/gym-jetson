@@ -7,7 +7,7 @@ Are you ready to learn how to use your Jetson TX2 for robotics applications? In 
 
 ## Getting Started
 
-1. Start by ordering the parts and gathering the tools listed in the [Bill of Materials](https://github.com/udacity/gym-jetson/blob/master/robot_construction/BOM.md) You will also find the .dxf file used to laser cut this robot. If you don't have access to a laser cuter, use the design to inspire your own version using other materials.
+1. Start by ordering the parts and gathering the tools listed in the [Bill of Materials](https://github.com/udacity/gym-jetson/blob/master/robot_construction/BOM.md) More information about laser cutting, such as size and thickness of material can also be found there. You will also find the .eps or .dxf file used to laser cut this robot. If you don't have access to a laser cutter, information about ordering the parts using a laser cutting production service is included.
 
 2. Set up your Jetson environment. This project was run on jetPack3.2, and was also tested on 3.1. Python libraries gpio, cffi, smbus, and numpy are required.
 
